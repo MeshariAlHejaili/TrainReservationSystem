@@ -16,8 +16,9 @@ namespace TrainReservationSystem
         public Admin()
         {
             InitializeComponent();
-            LoadTrainSchedules();  
-            }
+            LoadTrainSchedules();
+            passengerTrainDataGrid.CellDoubleClick += passengerTrainDataGrid_CellDoubleClick;
+        }
         private void LoadTrainSchedules()
         {
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -51,26 +52,17 @@ namespace TrainReservationSystem
             }
         }
 
-        private void btnAddReservation_Click(object sender, EventArgs e)
+        private void passengerTrainDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            addReservationForm addReservationForm = new addReservationForm();
-            addReservationForm.ShowDialog();    
-            this.Show();
+            if (e.RowIndex >= 0)
+            {
+                int scheduleId = Convert.ToInt32(passengerTrainDataGrid.Rows[e.RowIndex].Cells["ScheduleID"].Value);
+                trainDetailsForm detailsForm = new trainDetailsForm(scheduleId);
+                detailsForm.Show();
+            }
         }
 
-        private void btnCancelReservation_Click(object sender, EventArgs e)
-        {
-            cancelReservationForm cancelReservationForm = new cancelReservationForm();
-            cancelReservationForm.ShowDialog(); 
-            this.Show();
-        }
 
-        private void buttonbtnAssignStaff3_Click(object sender, EventArgs e)
-        {
-            assignStaffForm assignStaffForm = new assignStaffForm();   
-            assignStaffForm.ShowDialog();
-            this.Show();
-        }
 
         private void passengerTrainDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
