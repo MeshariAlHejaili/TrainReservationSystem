@@ -30,5 +30,17 @@ namespace TrainReservationSystem
             this.Hide();
             passengerDashboard.Show();
         }
+
+        private void showReserBtn_Click(object sender, EventArgs e)
+        {
+            paymentForm paymentForm = new paymentForm();
+            this.Hide();
+            paymentForm.Show();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

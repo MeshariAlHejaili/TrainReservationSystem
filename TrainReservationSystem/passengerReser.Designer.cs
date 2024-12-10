@@ -86,6 +86,7 @@
             showReserBtn.TabIndex = 0;
             showReserBtn.Text = "Refrech";
             showReserBtn.UseVisualStyleBackColor = true;
+            showReserBtn.Click += showReserBtn_Click;
             // 
             // dataGridView1
             // 
@@ -96,6 +97,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1008, 459);
             dataGridView1.TabIndex = 2;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // passengerReser
             // 

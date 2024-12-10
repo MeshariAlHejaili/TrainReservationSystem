@@ -60,6 +60,7 @@
             myResToolStripMenuItem.Name = "myResToolStripMenuItem";
             myResToolStripMenuItem.Size = new Size(168, 32);
             myResToolStripMenuItem.Text = "My Reservations";
+            myResToolStripMenuItem.Click += myResToolStripMenuItem_Click;
             // 
             // logOutToolStripMenuItem
             // 
@@ -90,8 +91,11 @@
             passengerTrainDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             passengerTrainDataGrid.Dock = DockStyle.Fill;
             passengerTrainDataGrid.Location = new Point(3, 95);
+            passengerTrainDataGrid.MultiSelect = false;
             passengerTrainDataGrid.Name = "passengerTrainDataGrid";
+            passengerTrainDataGrid.ReadOnly = true;
             passengerTrainDataGrid.RowHeadersWidth = 51;
+            passengerTrainDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             passengerTrainDataGrid.Size = new Size(1044, 459);
             passengerTrainDataGrid.TabIndex = 0;
             // 

@@ -18,7 +18,7 @@ namespace TrainReservationSystem
                 {
                     // Open the connection
                     connection.Open();
-                    Console.WriteLine("Connection successful!");
+                    
                 }
                 catch (Exception ex)
                 {

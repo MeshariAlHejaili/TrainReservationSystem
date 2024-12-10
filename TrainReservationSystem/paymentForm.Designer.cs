@@ -36,15 +36,15 @@
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel2 = new Panel();
-            textBox1 = new TextBox();
-            label2 = new Label();
-            label3 = new Label();
-            textBox2 = new TextBox();
-            label4 = new Label();
-            textBox3 = new TextBox();
             label5 = new Label();
             textBox4 = new TextBox();
+            textBox2 = new TextBox();
+            label3 = new Label();
+            label2 = new Label();
+            textBox3 = new TextBox();
+            textBox1 = new TextBox();
             button1 = new Button();
+            label4 = new Label();
             passengerReserMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             panel1.SuspendLayout();
@@ -69,6 +69,7 @@
             dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
             dashboardToolStripMenuItem.Size = new Size(122, 32);
             dashboardToolStripMenuItem.Text = "Dashboard";
+            dashboardToolStripMenuItem.Click += dashboardToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
@@ -77,6 +78,7 @@
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(92, 32);
             toolStripMenuItem1.Text = "LogOut";
+            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // numericUpDown1
             // 
@@ -84,6 +86,7 @@
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(172, 27);
             numericUpDown1.TabIndex = 2;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
             // 
             // panel1
             // 
@@ -107,81 +110,35 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.Dock = DockStyle.Top;
+            flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 104);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1025, 466);
+            flowLayoutPanel1.Size = new Size(1025, 331);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // panel2
             // 
-            panel2.Controls.Add(button1);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(textBox4);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(textBox3);
-            panel2.Controls.Add(label3);
             panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
+            panel2.Controls.Add(textBox3);
             panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(label4);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(0, 380);
+            panel2.Location = new Point(0, 435);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1025, 190);
+            panel2.Size = new Size(1025, 135);
             panel2.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(196, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(288, 27);
-            textBox1.TabIndex = 0;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(64, 59);
-            label2.Name = "label2";
-            label2.Size = new Size(108, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Name on Card:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(64, 96);
-            label3.Name = "label3";
-            label3.Size = new Size(101, 20);
-            label3.TabIndex = 3;
-            label3.Text = "Card Number:";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(196, 89);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(288, 27);
-            textBox2.TabIndex = 2;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(550, 55);
-            label4.Name = "label4";
-            label4.Size = new Size(72, 20);
-            label4.TabIndex = 5;
-            label4.Text = "Exp Date:";
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(643, 52);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(113, 27);
-            textBox3.TabIndex = 4;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(583, 92);
+            label5.Location = new Point(583, 74);
             label5.Name = "label5";
             label5.Size = new Size(39, 20);
             label5.TabIndex = 7;
@@ -189,10 +146,49 @@
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(643, 85);
+            textBox4.Location = new Point(643, 67);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(113, 27);
             textBox4.TabIndex = 6;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(196, 71);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(288, 27);
+            textBox2.TabIndex = 2;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(64, 78);
+            label3.Name = "label3";
+            label3.Size = new Size(101, 20);
+            label3.TabIndex = 3;
+            label3.Text = "Card Number:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(64, 41);
+            label2.Name = "label2";
+            label2.Size = new Size(108, 20);
+            label2.TabIndex = 1;
+            label2.Text = "Name on Card:";
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(643, 34);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(113, 27);
+            textBox3.TabIndex = 4;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(196, 34);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(288, 27);
+            textBox1.TabIndex = 0;
             // 
             // button1
             // 
@@ -202,6 +198,15 @@
             button1.TabIndex = 8;
             button1.Text = "Pay Now";
             button1.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(550, 37);
+            label4.Name = "label4";
+            label4.Size = new Size(72, 20);
+            label4.TabIndex = 5;
+            label4.Text = "Exp Date:";
             // 
             // paymentForm
             // 
