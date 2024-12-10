@@ -22,5 +22,12 @@ namespace TrainReservationSystem
             loginPageLabel.Parent = loginPageImage;
             loginPageLabel.BackColor = Color.Transparent;
         }
+
+        private void registerBtn_Click(object sender, EventArgs e)
+        {
+            Admin admin = new Admin();
+            admin.Show();
+            this.Hide();    
+        }
     }
 }
