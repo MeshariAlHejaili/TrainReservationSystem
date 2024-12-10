@@ -46,25 +46,28 @@ namespace TrainReservationSystem
             // 
             // usernameField
             // 
-            usernameField.Location = new Point(398, 242);
+            usernameField.Location = new Point(348, 182);
+            usernameField.Margin = new Padding(3, 2, 3, 2);
             usernameField.Name = "usernameField";
-            usernameField.Size = new Size(322, 27);
+            usernameField.Size = new Size(282, 23);
             usernameField.TabIndex = 0;
             // 
             // passwordField
             // 
-            passwordField.Location = new Point(398, 302);
+            passwordField.Location = new Point(348, 226);
+            passwordField.Margin = new Padding(3, 2, 3, 2);
             passwordField.Name = "passwordField";
             passwordField.PasswordChar = '*';
-            passwordField.Size = new Size(322, 27);
+            passwordField.Size = new Size(282, 23);
             passwordField.TabIndex = 1;
             // 
             // loginBtn
             // 
             loginBtn.Font = new Font("Segoe UI", 12F);
-            loginBtn.Location = new Point(410, 366);
+            loginBtn.Location = new Point(359, 274);
+            loginBtn.Margin = new Padding(3, 2, 3, 2);
             loginBtn.Name = "loginBtn";
-            loginBtn.Size = new Size(110, 62);
+            loginBtn.Size = new Size(96, 46);
             loginBtn.TabIndex = 2;
             loginBtn.Text = "Login";
             loginBtn.UseVisualStyleBackColor = true;
@@ -73,20 +76,22 @@ namespace TrainReservationSystem
             // registerBtn
             // 
             registerBtn.Font = new Font("Segoe UI", 12F);
-            registerBtn.Location = new Point(591, 366);
+            registerBtn.Location = new Point(517, 274);
+            registerBtn.Margin = new Padding(3, 2, 3, 2);
             registerBtn.Name = "registerBtn";
-            registerBtn.Size = new Size(110, 62);
+            registerBtn.Size = new Size(96, 46);
             registerBtn.TabIndex = 3;
             registerBtn.Text = "Register";
             registerBtn.UseVisualStyleBackColor = true;
+            registerBtn.Click += registerBtn_Click;
             // 
             // usernameLabel
             // 
             usernameLabel.AutoSize = true;
             usernameLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            usernameLabel.Location = new Point(290, 244);
+            usernameLabel.Location = new Point(254, 183);
             usernameLabel.Name = "usernameLabel";
-            usernameLabel.Size = new Size(106, 25);
+            usernameLabel.Size = new Size(84, 20);
             usernameLabel.TabIndex = 4;
             usernameLabel.Text = "Username:";
             // 
@@ -95,9 +100,9 @@ namespace TrainReservationSystem
             passwordLabel.AutoSize = true;
             passwordLabel.BackColor = Color.Transparent;
             passwordLabel.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            passwordLabel.Location = new Point(294, 304);
+            passwordLabel.Location = new Point(257, 228);
             passwordLabel.Name = "passwordLabel";
-            passwordLabel.Size = new Size(102, 25);
+            passwordLabel.Size = new Size(80, 20);
             passwordLabel.TabIndex = 5;
             passwordLabel.Text = "Password:";
             // 
@@ -106,9 +111,9 @@ namespace TrainReservationSystem
             loginPageLabel.AutoSize = true;
             loginPageLabel.BackColor = Color.Transparent;
             loginPageLabel.Font = new Font("Segoe UI", 30F, FontStyle.Bold);
-            loginPageLabel.Location = new Point(250, 79);
+            loginPageLabel.Location = new Point(219, 59);
             loginPageLabel.Name = "loginPageLabel";
-            loginPageLabel.Size = new Size(566, 67);
+            loginPageLabel.Size = new Size(453, 54);
             loginPageLabel.TabIndex = 6;
             loginPageLabel.Text = "Welcome to EasyTrains";
             loginPageLabel.TextAlign = ContentAlignment.MiddleCenter;
@@ -125,17 +130,18 @@ namespace TrainReservationSystem
             loginPageImage.Dock = DockStyle.Fill;
             loginPageImage.Image = Properties.Resources.train;
             loginPageImage.Location = new Point(0, 0);
+            loginPageImage.Margin = new Padding(3, 2, 3, 2);
             loginPageImage.Name = "loginPageImage";
-            loginPageImage.Size = new Size(1037, 635);
+            loginPageImage.Size = new Size(907, 476);
             loginPageImage.SizeMode = PictureBoxSizeMode.CenterImage;
             loginPageImage.TabIndex = 8;
             loginPageImage.TabStop = false;
             // 
             // LoginPage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1037, 635);
+            ClientSize = new Size(907, 476);
             Controls.Add(loginPageLabel);
             Controls.Add(passwordLabel);
             Controls.Add(usernameLabel);
@@ -144,6 +150,7 @@ namespace TrainReservationSystem
             Controls.Add(passwordField);
             Controls.Add(usernameField);
             Controls.Add(loginPageImage);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "LoginPage";
             Text = "EasyTrains-Login";
             Load += LoginPage_Load;
