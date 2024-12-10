@@ -22,7 +22,7 @@ namespace TrainReservationSystem
             {
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
-                Console.WriteLine("Database connection established.");
+                
             }
             catch (Exception ex)
             {
