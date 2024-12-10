@@ -6,7 +6,7 @@ namespace TrainReservationSystem
     internal class Mysql
     {
         // Define the connection string
-        private string connectionString = "Server=localhost;User id=root;password=Admin2003;Database=mydb";
+        private string connectionString = "Server=localhost;User id=root;password=148369;Database=mydb";
 
         // Method to connect to the database and display connection status
         public void Connect()

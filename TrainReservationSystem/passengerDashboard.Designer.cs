@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             passengerMenu = new MenuStrip();
-            homeToolStripMenuItem = new ToolStripMenuItem();
             myResToolStripMenuItem = new ToolStripMenuItem();
             logOutToolStripMenuItem = new ToolStripMenuItem();
             passengerTrainTable = new TableLayoutPanel();
@@ -48,19 +47,12 @@
             // 
             passengerMenu.Font = new Font("Segoe UI", 12F);
             passengerMenu.ImageScalingSize = new Size(20, 20);
-            passengerMenu.Items.AddRange(new ToolStripItem[] { homeToolStripMenuItem, myResToolStripMenuItem, logOutToolStripMenuItem });
+            passengerMenu.Items.AddRange(new ToolStripItem[] { myResToolStripMenuItem, logOutToolStripMenuItem });
             passengerMenu.Location = new Point(0, 0);
             passengerMenu.Name = "passengerMenu";
             passengerMenu.Size = new Size(1050, 36);
             passengerMenu.TabIndex = 0;
             passengerMenu.Text = "menuStrip1";
-            // 
-            // homeToolStripMenuItem
-            // 
-            homeToolStripMenuItem.BackColor = SystemColors.ButtonShadow;
-            homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            homeToolStripMenuItem.Size = new Size(79, 32);
-            homeToolStripMenuItem.Text = "Home";
             // 
             // myResToolStripMenuItem
             // 
@@ -137,9 +129,10 @@
             ClientSize = new Size(1050, 593);
             Controls.Add(passengerTrainTable);
             Controls.Add(passengerMenu);
+            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             MainMenuStrip = passengerMenu;
             Name = "passengerDashboard";
-            Text = "passengerDashboard";
+            Text = "Easy Trains-Passenger Dashboard";
             passengerMenu.ResumeLayout(false);
             passengerMenu.PerformLayout();
             passengerTrainTable.ResumeLayout(false);
@@ -153,7 +146,6 @@
         #endregion
 
         private MenuStrip passengerMenu;
-        private ToolStripMenuItem homeToolStripMenuItem;
         private ToolStripMenuItem myResToolStripMenuItem;
         private ToolStripMenuItem logOutToolStripMenuItem;
         private TableLayoutPanel passengerTrainTable;
