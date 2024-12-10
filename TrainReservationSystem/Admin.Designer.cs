@@ -68,6 +68,7 @@
             // passengerTrainDataGrid
             // 
             passengerTrainDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            passengerTrainDataGrid.Dock = DockStyle.Bottom;
             passengerTrainDataGrid.Location = new Point(0, 128);
             passengerTrainDataGrid.MultiSelect = false;
             passengerTrainDataGrid.Name = "passengerTrainDataGrid";
