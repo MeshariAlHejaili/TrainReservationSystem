@@ -20,7 +20,10 @@ namespace TrainReservationSystem
             InitializeComponent();
             this.scheduleId = scheduleId;
             LoadTrainReservations();
+            InitializeDataGridView();
         }
+
+
 
         private void LoadTrainReservations()
         {
@@ -29,23 +32,23 @@ namespace TrainReservationSystem
                 using (MySqlConnection conn = DatabaseHelper.GetConnection())
                 {
                     string query = @"
-            SELECT 
-                r.ReservationID,
-                p.PassengerName AS PassengerName,
-                r.SeatNumber,
-                r.ReservationDate,
-                r.TravelDate,
-                r.FlightNumber,
-                r.Status,
-                ts.ScheduleID
-            FROM 
-                reservation r
-            JOIN 
-                passenger p ON r.IDDocument = p.IDDocument
-            JOIN 
-                trainschedule ts ON r.ScheduleID = ts.ScheduleID
-            WHERE 
-                ts.ScheduleID = @ScheduleID;";
+                SELECT 
+                    r.ReservationID,
+                    p.PassengerName AS PassengerName,
+                    r.SeatNumber,
+                    r.ReservationDate,
+                    r.TravelDate,
+                    r.FlightNumber,
+                    r.Status,
+                    ts.ScheduleID
+                FROM 
+                    reservation r
+                JOIN 
+                    passenger p ON r.IDDocument = p.IDDocument
+                JOIN 
+                    trainschedule ts ON r.ScheduleID = ts.ScheduleID
+                WHERE 
+                    ts.ScheduleID = @ScheduleID;";
 
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@ScheduleID", scheduleId);
@@ -54,12 +57,10 @@ namespace TrainReservationSystem
                     DataTable dataTable = new DataTable();
                     adapter.Fill(dataTable);
 
-                    // Debugging - Print the number of rows returned
-                    Console.WriteLine("Number of rows: " + dataTable.Rows.Count);
-
                     if (dataTable.Rows.Count > 0)
                     {
                         reservationsDataGrid.DataSource = dataTable;
+                        InitializeDataGridView(); // Only call this after data is loaded
                     }
                     else
                     {
@@ -74,7 +75,21 @@ namespace TrainReservationSystem
             }
         }
 
-
+        private void InitializeDataGridView()
+        {
+            // Ensure the grid has data before modifying columns
+            if (reservationsDataGrid.Rows.Count > 0)
+            {
+                // Set columns to be editable or read-only
+                reservationsDataGrid.Columns["ReservationID"].ReadOnly = true;
+                reservationsDataGrid.Columns["PassengerName"].ReadOnly = true;
+                reservationsDataGrid.Columns["SeatNumber"].ReadOnly = false; // Editable
+                reservationsDataGrid.Columns["Status"].ReadOnly = false; // Editable
+                reservationsDataGrid.Columns["ReservationDate"].ReadOnly = false; // Editable
+                reservationsDataGrid.Columns["TravelDate"].ReadOnly = false; // Editable
+                reservationsDataGrid.Columns["FlightNumber"].ReadOnly = false; // Editable
+            }
+        }
 
         // Declare controls for the UI
 
@@ -86,7 +101,7 @@ namespace TrainReservationSystem
 
         private void btnAddReservation_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnCancelReservation_Click(object sender, EventArgs e)
@@ -137,6 +152,67 @@ namespace TrainReservationSystem
         private void trainDetailsForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnUpdateReservation_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (reservationsDataGrid.SelectedRows.Count > 0)
+                {
+                    // Get the selected reservation's ID
+                    int reservationId = Convert.ToInt32(reservationsDataGrid.SelectedRows[0].Cells["ReservationID"].Value);
+
+                    // Retrieve the new values from the DataGridView
+                    string seatNumber = reservationsDataGrid.SelectedRows[0].Cells["SeatNumber"].Value.ToString();
+                    string status = reservationsDataGrid.SelectedRows[0].Cells["Status"].Value.ToString();
+                    DateTime reservationDate = Convert.ToDateTime(reservationsDataGrid.SelectedRows[0].Cells["ReservationDate"].Value);
+                    DateTime travelDate = Convert.ToDateTime(reservationsDataGrid.SelectedRows[0].Cells["TravelDate"].Value);
+                    string flightNumber = reservationsDataGrid.SelectedRows[0].Cells["FlightNumber"].Value.ToString();
+
+                    // Update the reservation in the database
+                    using (MySqlConnection conn = DatabaseHelper.GetConnection())
+                    {
+                        string query = @"
+                    UPDATE reservation
+                    SET 
+                        SeatNumber = @SeatNumber,
+                        Status = @Status,
+                        ReservationDate = @ReservationDate,
+                        TravelDate = @TravelDate,
+                        FlightNumber = @FlightNumber
+                    WHERE 
+                        ReservationID = @ReservationID";
+
+                        MySqlCommand cmd = new MySqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@SeatNumber", seatNumber);
+                        cmd.Parameters.AddWithValue("@Status", status);
+                        cmd.Parameters.AddWithValue("@ReservationDate", reservationDate);
+                        cmd.Parameters.AddWithValue("@TravelDate", travelDate);
+                        cmd.Parameters.AddWithValue("@FlightNumber", flightNumber);
+                        cmd.Parameters.AddWithValue("@ReservationID", reservationId);
+
+                        conn.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Reservation updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to update the reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a reservation to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

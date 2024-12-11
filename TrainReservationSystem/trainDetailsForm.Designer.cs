@@ -32,6 +32,7 @@
             reservationsDataGrid = new DataGridView();
             btnAddReservation = new Button();
             btnCancelReservation = new Button();
+            btnUpdateReservation = new Button();
             ((System.ComponentModel.ISupportInitialize)reservationsDataGrid).BeginInit();
             SuspendLayout();
             // 
@@ -49,7 +50,6 @@
             reservationsDataGrid.Location = new Point(0, 127);
             reservationsDataGrid.MultiSelect = false;
             reservationsDataGrid.Name = "reservationsDataGrid";
-            reservationsDataGrid.ReadOnly = true;
             reservationsDataGrid.RowHeadersVisible = false;
             reservationsDataGrid.RowHeadersWidth = 51;
             reservationsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -59,7 +59,7 @@
             // 
             // btnAddReservation
             // 
-            btnAddReservation.Location = new Point(0, 12);
+            btnAddReservation.Location = new Point(12, 12);
             btnAddReservation.Name = "btnAddReservation";
             btnAddReservation.Size = new Size(139, 23);
             btnAddReservation.TabIndex = 5;
@@ -69,7 +69,7 @@
             // 
             // btnCancelReservation
             // 
-            btnCancelReservation.Location = new Point(173, 12);
+            btnCancelReservation.Location = new Point(165, 12);
             btnCancelReservation.Name = "btnCancelReservation";
             btnCancelReservation.Size = new Size(135, 23);
             btnCancelReservation.TabIndex = 6;
@@ -77,11 +77,22 @@
             btnCancelReservation.UseVisualStyleBackColor = true;
             btnCancelReservation.Click += btnCancelReservation_Click;
             // 
+            // btnUpdateReservation
+            // 
+            btnUpdateReservation.Location = new Point(327, 12);
+            btnUpdateReservation.Name = "btnUpdateReservation";
+            btnUpdateReservation.Size = new Size(154, 23);
+            btnUpdateReservation.TabIndex = 7;
+            btnUpdateReservation.Text = "Update reservation";
+            btnUpdateReservation.UseVisualStyleBackColor = true;
+            btnUpdateReservation.Click += btnUpdateReservation_Click;
+            // 
             // trainDetailsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnUpdateReservation);
             Controls.Add(btnCancelReservation);
             Controls.Add(btnAddReservation);
             Controls.Add(reservationsDataGrid);
@@ -98,5 +109,6 @@
         private DataGridView reservationsDataGrid;
         private Button btnAddReservation;
         private Button btnCancelReservation;
+        private Button btnUpdateReservation;
     }
 }
