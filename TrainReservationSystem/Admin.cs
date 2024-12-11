@@ -54,13 +54,68 @@ namespace TrainReservationSystem
 
         private void passengerTrainDataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Ensure a valid row is selected
             if (e.RowIndex >= 0)
             {
-                int scheduleId = Convert.ToInt32(passengerTrainDataGrid.Rows[e.RowIndex].Cells["ScheduleID"].Value);
-                trainDetailsForm detailsForm = new trainDetailsForm(scheduleId);
-                detailsForm.Show();
+                var scheduleIdCellValue = passengerTrainDataGrid.Rows[e.RowIndex].Cells["ScheduleID"].Value;
+
+                // Check if the ScheduleID is valid (not null or DBNull)
+                if (scheduleIdCellValue != null && scheduleIdCellValue != DBNull.Value)
+                {
+                    try
+                    {
+                        // Try to convert the ScheduleID to an integer
+                        int scheduleId = Convert.ToInt32(scheduleIdCellValue);
+
+                        // Check if a valid reservation exists for this ScheduleID
+                        if (scheduleId > 0) // Assuming valid ScheduleID is > 0
+                        {
+                            // Open the train details form with the corresponding schedule ID
+                            trainDetailsForm detailsForm = new trainDetailsForm(scheduleId);
+                            detailsForm.Show();
+                        }
+                        else
+                        {
+                            // Only show message once
+                            if (!isMessageShown) // Ensure the message is shown once
+                            {
+                                isMessageShown = true;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // Only show message once
+                        if (!isMessageShown) // Ensure the message is shown once
+                        {
+                            isMessageShown = true;
+                        }
+                    }
+                }
+                else
+                {
+                    // In case ScheduleID is null or invalid, show a message
+                    if (!isMessageShown) // Ensure the message is shown once
+                    {
+                        MessageBox.Show("Selected row does not contain a valid Schedule ID.");
+                        isMessageShown = true;
+                    }
+                }
+            }
+            else
+            {
+                // Message for invalid row selection
+                if (!isMessageShown) // Ensure the message is shown once
+                {
+                    MessageBox.Show("Please select a valid reservation row.");
+                    isMessageShown = true;
+                }
             }
         }
+
+        // Flag to ensure the message is only shown once
+        private bool isMessageShown = false;
+
 
 
 

@@ -32,7 +32,6 @@
             reservationsDataGrid = new DataGridView();
             btnAddReservation = new Button();
             btnCancelReservation = new Button();
-            scheduleLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)reservationsDataGrid).BeginInit();
             SuspendLayout();
             // 
@@ -44,12 +43,14 @@
             // 
             // reservationsDataGrid
             // 
+            reservationsDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            reservationsDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             reservationsDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            reservationsDataGrid.Dock = DockStyle.Bottom;
             reservationsDataGrid.Location = new Point(0, 127);
             reservationsDataGrid.MultiSelect = false;
             reservationsDataGrid.Name = "reservationsDataGrid";
             reservationsDataGrid.ReadOnly = true;
+            reservationsDataGrid.RowHeadersVisible = false;
             reservationsDataGrid.RowHeadersWidth = 51;
             reservationsDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             reservationsDataGrid.Size = new Size(800, 323);
@@ -76,21 +77,11 @@
             btnCancelReservation.UseVisualStyleBackColor = true;
             btnCancelReservation.Click += btnCancelReservation_Click;
             // 
-            // scheduleLabel
-            // 
-            scheduleLabel.AutoSize = true;
-            scheduleLabel.Location = new Point(7, 53);
-            scheduleLabel.Name = "scheduleLabel";
-            scheduleLabel.Size = new Size(107, 15);
-            scheduleLabel.TabIndex = 7;
-            scheduleLabel.Text = "Train Schedule Info";
-            // 
             // trainDetailsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(scheduleLabel);
             Controls.Add(btnCancelReservation);
             Controls.Add(btnAddReservation);
             Controls.Add(reservationsDataGrid);
@@ -99,7 +90,6 @@
             Load += trainDetailsForm_Load;
             ((System.ComponentModel.ISupportInitialize)reservationsDataGrid).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -108,6 +98,5 @@
         private DataGridView reservationsDataGrid;
         private Button btnAddReservation;
         private Button btnCancelReservation;
-        private Label scheduleLabel;
     }
 }
