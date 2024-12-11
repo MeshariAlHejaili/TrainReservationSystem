@@ -33,7 +33,11 @@ namespace TrainReservationSystem
                 r.ReservationID,
                 p.PassengerName AS PassengerName,
                 r.SeatNumber,
-                r.ReservationDate
+                r.ReservationDate,
+                r.TravelDate,
+                r.FlightNumber,
+                r.Status,
+                ts.ScheduleID
             FROM 
                 reservation r
             JOIN 
@@ -60,6 +64,7 @@ namespace TrainReservationSystem
                     else
                     {
                         MessageBox.Show("No reservations found for this schedule.");
+                        this.Close();
                     }
                 }
             }
@@ -68,6 +73,7 @@ namespace TrainReservationSystem
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
 
 
         // Declare controls for the UI
@@ -85,7 +91,47 @@ namespace TrainReservationSystem
 
         private void btnCancelReservation_Click(object sender, EventArgs e)
         {
+            if (reservationsDataGrid.SelectedRows.Count > 0)
+            {
+                int reservationId = Convert.ToInt32(reservationsDataGrid.SelectedRows[0].Cells["ReservationID"].Value);
 
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to cancel this reservation?", "Confirm Cancellation", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using (MySqlConnection conn = DatabaseHelper.GetConnection())
+                        {
+                            conn.Open();
+
+                            string query = "DELETE FROM reservation WHERE ReservationID = @ReservationID";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ReservationID", reservationId);
+
+                            int result = cmd.ExecuteNonQuery();
+                            if (result > 0)
+                            {
+                                MessageBox.Show("Reservation canceled successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                // Remove the selected row from the DataGridView
+                                reservationsDataGrid.Rows.RemoveAt(reservationsDataGrid.SelectedRows[0].Index);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to cancel the reservation.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a reservation to cancel.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void trainDetailsForm_Load(object sender, EventArgs e)
