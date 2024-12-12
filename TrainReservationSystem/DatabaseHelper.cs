@@ -13,7 +13,7 @@ namespace TrainReservationSystem
         private static MySqlConnection connection;
 
         // Connection string
-        private static string connectionString = "Server=localhost;User id=root;password=Admin2003;Database=mydb";
+        private static string connectionString = "Server=localhost;User id=root;password=148369;Database=newschema";
 
         // Method to initialize the connection
         public static void InitializeConnection()
