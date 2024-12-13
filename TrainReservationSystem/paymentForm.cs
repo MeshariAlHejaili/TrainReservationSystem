@@ -23,54 +23,7 @@ namespace TrainReservationSystem
         {
             InitializeComponent();
         }
-        //private void PaymentForm_Load(object sender, EventArgs e)
-        //{
-        //    // Populate the UI with schedule details when the form loads
-        //    lblTrainName.Text = TrainName;
-        //    lblDepartureStation.Text = DepartureStation;
-        //    lblArrivalStation.Text = ArrivalStation;
-        //    lblTravelDate.Text = TravelDate.ToShortDateString();
-        //}
-        //private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        //{
-        //    int ticketCount = (int)numericUpDown1.Value;
-
-        //    // Clear previous fields
-        //    flowLayoutPanel1.Controls.Clear();
-
-        //    // Dynamically add fields for each passenger
-        //    for (int i = 1; i <= ticketCount; i++)
-        //    {
-        //        // Create and configure controls
-        //        Label lblName = new Label
-        //        {
-        //            Text = $"Passenger {i} Name:",
-        //            AutoSize = true
-        //        };
-        //        TextBox txtName = new TextBox
-        //        {
-        //            Name = $"txtPassengerName{i}",
-        //            Width = 450
-        //        };
-
-        //        Label lblAge = new Label
-        //        {
-        //            Text = $"Passenger {i} Age:",
-        //            AutoSize = true
-        //        };
-        //        TextBox txtAge = new TextBox
-        //        {
-        //            Name = $"txtPassengerAge{i}",
-        //            Width = 100
-        //        };
-
-        //        // Add controls to the panel
-        //        flowLayoutPanel1.Controls.Add(lblName);
-        //        flowLayoutPanel1.Controls.Add(txtName);
-        //        flowLayoutPanel1.Controls.Add(lblAge);
-        //        flowLayoutPanel1.Controls.Add(txtAge);
-        //    }
-        //}
+        
         private int GetTrainID(int scheduleID)
         {
             string query = "SELECT TrainID FROM trainschedule WHERE ScheduleID = @ScheduleID";
@@ -107,10 +60,11 @@ namespace TrainReservationSystem
         SELECT SeatNumber 
         FROM seats 
         WHERE TrainID = @TrainID 
-        AND SeatID NOT IN (
-            SELECT SeatID 
-            FROM reservation 
-            WHERE ScheduleID = @ScheduleID
+        AND SeatNumber NOT IN (
+            SELECT s.SeatNumber 
+            FROM reservation r
+            JOIN seats s ON r.SeatNumber = s.SeatNumber
+            WHERE r.ScheduleID = @ScheduleID
         )";
 
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -120,13 +74,22 @@ namespace TrainReservationSystem
                     conn.Open();
                     MySqlCommand cmd = new MySqlCommand(query, conn);
 
+                    // Pass TrainID and ScheduleID as parameters
                     cmd.Parameters.AddWithValue("@TrainID", trainID);
                     cmd.Parameters.AddWithValue("@ScheduleID", ScheduleID);
 
                     MySqlDataReader reader = cmd.ExecuteReader();
+
+                    comboBox.Items.Clear(); // Clear any existing items
+
                     while (reader.Read())
                     {
                         comboBox.Items.Add(reader.GetString("SeatNumber"));
+                    }
+
+                    if (comboBox.Items.Count == 0)
+                    {
+                        MessageBox.Show("No available seats for the selected schedule.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 catch (Exception ex)
@@ -135,7 +98,6 @@ namespace TrainReservationSystem
                 }
             }
         }
-
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -199,6 +161,7 @@ namespace TrainReservationSystem
                 flowLayoutPanel1.Controls.Add(lblSeat);
                 flowLayoutPanel1.Controls.Add(cmbSeat);
             }
+            CalculatePrice();
         }
         private void InsertReservation(string passengerName, string passengerAge, string seatNumber, int trainID)
         {
@@ -294,5 +257,22 @@ namespace TrainReservationSystem
                 MessageBox.Show($"Error during booking: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void CalculatePrice()
+        {
+            int ticketCount = (int)numericUpDown1.Value; // Get the number of tickets from the numeric up-down control
+            decimal pricePerTicket = 50m; // Fixed price per ticket
+            decimal vatRate = 0.15m; // VAT rate (15%)
+
+            // Calculate subprice, VAT, and total
+            decimal subprice = ticketCount * pricePerTicket;
+            decimal vat = subprice * vatRate;
+            decimal totalPrice = subprice + vat;
+
+            // Update the labels
+            lblSubPrice.Text = $"Subtotal: ${subprice:F2}";
+            lblVAT.Text = $"VAT (15%): ${vat:F2}";
+            lblTotalPrice.Text = $"Total: ${totalPrice:F2}";
+        }
+
     }
 }

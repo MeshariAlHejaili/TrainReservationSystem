@@ -36,6 +36,9 @@
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel2 = new Panel();
+            lblTotalPrice = new Label();
+            lblVAT = new Label();
+            lblSubPrice = new Label();
             label5 = new Label();
             txtCVV = new TextBox();
             txtCardNumber = new TextBox();
@@ -53,7 +56,7 @@
             // 
             // passengerReserMenu
             // 
-            passengerReserMenu.BackColor = Color.FromArgb(0, 192, 192);
+            passengerReserMenu.BackColor = SystemColors.ActiveCaption;
             passengerReserMenu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             passengerReserMenu.ImageScalingSize = new Size(20, 20);
             passengerReserMenu.Items.AddRange(new ToolStripItem[] { dashboardToolStripMenuItem, toolStripMenuItem1 });
@@ -90,6 +93,7 @@
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.AppWorkspace;
             panel1.Controls.Add(label1);
             panel1.Controls.Add(numericUpDown1);
             panel1.Dock = DockStyle.Top;
@@ -115,11 +119,14 @@
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(0, 115);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(1025, 314);
+            flowLayoutPanel1.Size = new Size(1025, 320);
             flowLayoutPanel1.TabIndex = 4;
             // 
             // panel2
             // 
+            panel2.Controls.Add(lblTotalPrice);
+            panel2.Controls.Add(lblVAT);
+            panel2.Controls.Add(lblSubPrice);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(txtCVV);
             panel2.Controls.Add(txtCardNumber);
@@ -135,10 +142,37 @@
             panel2.Size = new Size(1025, 135);
             panel2.TabIndex = 5;
             // 
+            // lblTotalPrice
+            // 
+            lblTotalPrice.AutoSize = true;
+            lblTotalPrice.Location = new Point(729, 81);
+            lblTotalPrice.Name = "lblTotalPrice";
+            lblTotalPrice.Size = new Size(57, 20);
+            lblTotalPrice.TabIndex = 11;
+            lblTotalPrice.Text = "Total: 0";
+            // 
+            // lblVAT
+            // 
+            lblVAT.AutoSize = true;
+            lblVAT.Location = new Point(695, 48);
+            lblVAT.Name = "lblVAT";
+            lblVAT.Size = new Size(91, 20);
+            lblVAT.TabIndex = 10;
+            lblVAT.Text = "VAT (15%): 0";
+            // 
+            // lblSubPrice
+            // 
+            lblSubPrice.AutoSize = true;
+            lblSubPrice.Location = new Point(706, 16);
+            lblSubPrice.Name = "lblSubPrice";
+            lblSubPrice.Size = new Size(80, 20);
+            lblSubPrice.TabIndex = 9;
+            lblSubPrice.Text = "Subtotal: 0";
+            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(583, 74);
+            label5.Location = new Point(479, 69);
             label5.Name = "label5";
             label5.Size = new Size(39, 20);
             label5.TabIndex = 7;
@@ -146,14 +180,14 @@
             // 
             // txtCVV
             // 
-            txtCVV.Location = new Point(643, 67);
+            txtCVV.Location = new Point(524, 73);
             txtCVV.Name = "txtCVV";
             txtCVV.Size = new Size(113, 27);
             txtCVV.TabIndex = 6;
             // 
             // txtCardNumber
             // 
-            txtCardNumber.Location = new Point(196, 71);
+            txtCardNumber.Location = new Point(126, 74);
             txtCardNumber.Name = "txtCardNumber";
             txtCardNumber.Size = new Size(288, 27);
             txtCardNumber.TabIndex = 2;
@@ -161,7 +195,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(64, 78);
+            label3.Location = new Point(19, 74);
             label3.Name = "label3";
             label3.Size = new Size(101, 20);
             label3.TabIndex = 3;
@@ -170,7 +204,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(64, 41);
+            label2.Location = new Point(12, 34);
             label2.Name = "label2";
             label2.Size = new Size(108, 20);
             label2.TabIndex = 1;
@@ -178,21 +212,21 @@
             // 
             // txtExpiryDate
             // 
-            txtExpiryDate.Location = new Point(643, 34);
+            txtExpiryDate.Location = new Point(524, 37);
             txtExpiryDate.Name = "txtExpiryDate";
             txtExpiryDate.Size = new Size(113, 27);
             txtExpiryDate.TabIndex = 4;
             // 
             // txtCardHolderName
             // 
-            txtCardHolderName.Location = new Point(196, 34);
+            txtCardHolderName.Location = new Point(126, 34);
             txtCardHolderName.Name = "txtCardHolderName";
             txtCardHolderName.Size = new Size(288, 27);
             txtCardHolderName.TabIndex = 0;
             // 
             // button1
             // 
-            button1.Location = new Point(863, 59);
+            button1.Location = new Point(902, 48);
             button1.Name = "button1";
             button1.Size = new Size(94, 41);
             button1.TabIndex = 8;
@@ -203,7 +237,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(550, 37);
+            label4.Location = new Point(446, 37);
             label4.Name = "label4";
             label4.Size = new Size(72, 20);
             label4.TabIndex = 5;
@@ -250,5 +284,8 @@
         private Button button1;
         private Label label5;
         private TextBox txtCVV;
+        private Label lblTotalPrice;
+        private Label lblVAT;
+        private Label lblSubPrice;
     }
 }

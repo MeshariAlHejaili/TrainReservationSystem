@@ -174,8 +174,13 @@ namespace TrainReservationSystem
 
                 // Show the PaymentForm
                 paymentForm.Show();
+                this.Hide();
             }
         }
 
+        private void showAllBtn_Click(object sender, EventArgs e)
+        {
+            LoadTrainSchedules();
+        }
     }
 }

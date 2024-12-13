@@ -41,7 +41,7 @@
             // 
             // passengerReserMenu
             // 
-            passengerReserMenu.BackColor = Color.FromArgb(0, 192, 192);
+            passengerReserMenu.BackColor = Color.Silver;
             passengerReserMenu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             passengerReserMenu.ImageScalingSize = new Size(20, 20);
             passengerReserMenu.Items.AddRange(new ToolStripItem[] { dashboardToolStripMenuItem, toolStripMenuItem1 });
