@@ -8,33 +8,65 @@ namespace TrainReservationSystem
         {
             InitializeComponent();
         }
+        //private void loginBtn_Click(object sender, EventArgs e)
+        //{
+        //    string email = emailFiled.Text;
+        //    string password = passwordFiled.Text;
+
+        //    // Check if the user is a staff member
+        //    if (IsStaff(email, password))
+        //    {
+        //        // If the user is a staff, open the Admin form
+        //        Admin adminForm = new Admin();
+        //        adminForm.Show();
+        //        this.Hide(); // Hide the current login form
+        //    }
+        //    // If the user is not a staff, check if they are a passenger
+        //    else if (IsPassenger(email, password))
+        //    {
+        //        // If the user is a passenger, open the PassengerDashboard form
+        //        passengerDashboard passengerDashboardForm = new passengerDashboard();
+        //        passengerDashboardForm.Show();
+        //        this.Hide(); // Hide the current login form
+        //    }
+        //    else
+        //    {
+        //        // Show error message if no match is found
+        //        MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
         private void loginBtn_Click(object sender, EventArgs e)
         {
             string email = emailFiled.Text;
             string password = passwordFiled.Text;
 
-            // Check if the user is a staff member
-            if (IsStaff(email, password))
+            // Check if the user is a passenger
+            string passengerID = IsPassenger(email, password);
+            if (passengerID != null)
             {
-                // If the user is a staff, open the Admin form
+                // Store the IDDocument in the session
+                Session.LoggedInPassengerIDDocument = passengerID;
+
+                // Open PassengerDashboard
+                passengerDashboard dashboard = new passengerDashboard();
+                dashboard.Show();
+                this.Hide();
+            }
+            else if (IsStaff(email, password)) // Assuming you have an IsStaff method
+            {
+                // Open Admin form if it's a staff member
                 Admin adminForm = new Admin();
                 adminForm.Show();
-                this.Hide(); // Hide the current login form
-            }
-            // If the user is not a staff, check if they are a passenger
-            else if (IsPassenger(email, password))
-            {
-                // If the user is a passenger, open the PassengerDashboard form
-                passengerDashboard passengerDashboardForm = new passengerDashboard();
-                passengerDashboardForm.Show();
-                this.Hide(); // Hide the current login form
+                this.Hide();
             }
             else
             {
-                // Show error message if no match is found
+                // Show an error message if login fails
                 MessageBox.Show("Invalid email or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void LoginPage_Load(object sender, EventArgs e)
         {
@@ -70,9 +102,25 @@ namespace TrainReservationSystem
         }
 
         // Method to check if the email and password belong to a passenger
-        private bool IsPassenger(string email, string password)
+        //private bool IsPassenger(string email, string password)
+        //{
+        //    string query = "SELECT COUNT(*) FROM passenger WHERE Email = @Email AND Password = @Password";
+
+        //    using (MySqlConnection conn = DatabaseHelper.GetConnection())
+        //    {
+        //        MySqlCommand cmd = new MySqlCommand(query, conn);
+        //        cmd.Parameters.AddWithValue("@Email", email);
+        //        cmd.Parameters.AddWithValue("@Password", password);
+
+        //        conn.Open();
+        //        int count = Convert.ToInt32(cmd.ExecuteScalar());
+        //        return count > 0;
+        //    }
+        //}
+
+        private string IsPassenger(string email, string password)
         {
-            string query = "SELECT COUNT(*) FROM passenger WHERE Email = @Email AND Password = @Password";
+            string query = "SELECT IDDocument FROM passenger WHERE Email = @Email AND Password = @Password";
 
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
             {
@@ -81,10 +129,11 @@ namespace TrainReservationSystem
                 cmd.Parameters.AddWithValue("@Password", password);
 
                 conn.Open();
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
-                return count > 0;
+                object result = cmd.ExecuteScalar();
+                return result != null ? result.ToString() : null; // Return IDDocument or null if not found
             }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

@@ -33,10 +33,10 @@
             toolStripMenuItem1 = new ToolStripMenuItem();
             panel1 = new Panel();
             showReserBtn = new Button();
-            dataGridView1 = new DataGridView();
+            dataGridViewReservations = new DataGridView();
             passengerReserMenu.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).BeginInit();
             SuspendLayout();
             // 
             // passengerReserMenu
@@ -88,23 +88,22 @@
             showReserBtn.UseVisualStyleBackColor = true;
             showReserBtn.Click += showReserBtn_Click;
             // 
-            // dataGridView1
+            // dataGridViewReservations
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 106);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1008, 459);
-            dataGridView1.TabIndex = 2;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridViewReservations.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewReservations.Dock = DockStyle.Fill;
+            dataGridViewReservations.Location = new Point(0, 106);
+            dataGridViewReservations.Name = "dataGridViewReservations";
+            dataGridViewReservations.RowHeadersWidth = 51;
+            dataGridViewReservations.Size = new Size(1008, 459);
+            dataGridViewReservations.TabIndex = 2;
             // 
             // passengerReser
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 565);
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridViewReservations);
             Controls.Add(panel1);
             Controls.Add(passengerReserMenu);
             MainMenuStrip = passengerReserMenu;
@@ -113,7 +112,7 @@
             passengerReserMenu.ResumeLayout(false);
             passengerReserMenu.PerformLayout();
             panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewReservations).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -125,6 +124,6 @@
         private ToolStripMenuItem toolStripMenuItem1;
         private Panel panel1;
         private Button showReserBtn;
-        private DataGridView dataGridView1;
+        private DataGridView dataGridViewReservations;
     }
 }

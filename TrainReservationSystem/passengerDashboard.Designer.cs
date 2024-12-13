@@ -34,8 +34,13 @@
             passengerTrainTable = new TableLayoutPanel();
             passengerTrainDataGrid = new DataGridView();
             panel1 = new Panel();
+            btnSearch = new Button();
+            label3 = new Label();
+            label2 = new Label();
+            cmbDestinationStation = new ComboBox();
+            cmbDepartureStation = new ComboBox();
             label1 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dtpTravelDate = new DateTimePicker();
             pageSetupDialog1 = new PageSetupDialog();
             passengerMenu.SuspendLayout();
             passengerTrainTable.SuspendLayout();
@@ -98,33 +103,83 @@
             passengerTrainDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             passengerTrainDataGrid.Size = new Size(1044, 459);
             passengerTrainDataGrid.TabIndex = 0;
+            passengerTrainDataGrid.CellContentDoubleClick += passengerTrainDataGrid_CellDoubleClick;
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnSearch);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(cmbDestinationStation);
+            panel1.Controls.Add(cmbDepartureStation);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(dateTimePicker1);
+            panel1.Controls.Add(dtpTravelDate);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(1044, 86);
             panel1.TabIndex = 1;
             // 
+            // btnSearch
+            // 
+            btnSearch.Location = new Point(929, 24);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(94, 29);
+            btnSearch.TabIndex = 6;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(279, 30);
+            label3.Name = "label3";
+            label3.Size = new Size(88, 20);
+            label3.TabIndex = 5;
+            label3.Text = "Destination:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(33, 30);
+            label2.Name = "label2";
+            label2.Size = new Size(79, 20);
+            label2.TabIndex = 4;
+            label2.Text = "Departure:";
+            // 
+            // cmbDestinationStation
+            // 
+            cmbDestinationStation.FormattingEnabled = true;
+            cmbDestinationStation.Location = new Point(373, 25);
+            cmbDestinationStation.Name = "cmbDestinationStation";
+            cmbDestinationStation.Size = new Size(151, 28);
+            cmbDestinationStation.TabIndex = 3;
+            // 
+            // cmbDepartureStation
+            // 
+            cmbDepartureStation.FormattingEnabled = true;
+            cmbDepartureStation.Location = new Point(112, 25);
+            cmbDepartureStation.Name = "cmbDepartureStation";
+            cmbDepartureStation.Size = new Size(151, 28);
+            cmbDepartureStation.TabIndex = 2;
+            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F);
-            label1.Location = new Point(707, 25);
+            label1.Location = new Point(547, 26);
             label1.Name = "label1";
             label1.Size = new Size(57, 28);
             label1.TabIndex = 1;
             label1.Text = "Date:";
             // 
-            // dateTimePicker1
+            // dtpTravelDate
             // 
-            dateTimePicker1.Location = new Point(770, 27);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(247, 27);
-            dateTimePicker1.TabIndex = 0;
+            dtpTravelDate.Location = new Point(624, 26);
+            dtpTravelDate.Name = "dtpTravelDate";
+            dtpTravelDate.Size = new Size(247, 27);
+            dtpTravelDate.TabIndex = 0;
             // 
             // passengerDashboard
             // 
@@ -156,7 +211,12 @@
         private DataGridView passengerTrainDataGrid;
         private Panel panel1;
         private Label label1;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpTravelDate;
         private PageSetupDialog pageSetupDialog1;
+        private ComboBox cmbDestinationStation;
+        private ComboBox cmbDepartureStation;
+        private Label label3;
+        private Label label2;
+        private Button btnSearch;
     }
 }
