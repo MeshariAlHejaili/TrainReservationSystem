@@ -35,13 +35,11 @@ namespace TrainReservationSystem
             emailFiled = new TextBox();
             passwordFiled = new TextBox();
             loginBtn = new Button();
-            registerBtn = new Button();
             emailLabel = new Label();
             passwordLabel = new Label();
             loginPageLabel = new Label();
             imageList1 = new ImageList(components);
             loginPageImage = new PictureBox();
-            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)loginPageImage).BeginInit();
             SuspendLayout();
             // 
@@ -71,17 +69,6 @@ namespace TrainReservationSystem
             loginBtn.UseVisualStyleBackColor = true;
             loginBtn.Click += loginBtn_Click;
             // 
-            // registerBtn
-            // 
-            registerBtn.Font = new Font("Segoe UI", 12F);
-            registerBtn.Location = new Point(855, 365);
-            registerBtn.Name = "registerBtn";
-            registerBtn.Size = new Size(110, 61);
-            registerBtn.TabIndex = 3;
-            registerBtn.Text = "Admin";
-            registerBtn.UseVisualStyleBackColor = true;
-            registerBtn.Click += registerBtn_Click;
-            // 
             // emailLabel
             // 
             emailLabel.AutoSize = true;
@@ -108,7 +95,7 @@ namespace TrainReservationSystem
             loginPageLabel.AutoSize = true;
             loginPageLabel.BackColor = Color.Transparent;
             loginPageLabel.Font = new Font("Segoe UI", 30F, FontStyle.Bold);
-            loginPageLabel.Location = new Point(250, 79);
+            loginPageLabel.Location = new Point(249, 116);
             loginPageLabel.Name = "loginPageLabel";
             loginPageLabel.Size = new Size(566, 67);
             loginPageLabel.TabIndex = 6;
@@ -133,27 +120,14 @@ namespace TrainReservationSystem
             loginPageImage.TabIndex = 8;
             loginPageImage.TabStop = false;
             // 
-            // button1
-            // 
-            button1.Font = new Font("Segoe UI", 12F);
-            button1.Location = new Point(739, 365);
-            button1.Name = "button1";
-            button1.Size = new Size(110, 61);
-            button1.TabIndex = 9;
-            button1.Text = "passenger";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // LoginPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1037, 635);
-            Controls.Add(button1);
             Controls.Add(loginPageLabel);
             Controls.Add(passwordLabel);
             Controls.Add(emailLabel);
-            Controls.Add(registerBtn);
             Controls.Add(loginBtn);
             Controls.Add(passwordFiled);
             Controls.Add(emailFiled);
@@ -174,12 +148,10 @@ namespace TrainReservationSystem
         private TextBox emailFiled;
         private TextBox passwordFiled;
         private Button loginBtn;
-        private Button registerBtn;
         private Label emailLabel;
         private Label passwordLabel;
         private Label loginPageLabel;
         private ImageList imageList1;
         private PictureBox loginPageImage;
-        private Button button1;
     }
 }

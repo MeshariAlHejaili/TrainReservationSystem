@@ -15,6 +15,7 @@ namespace TrainReservationSystem
     {
         private int selectedScheduleId = 0; // To store selected ScheduleID
         private bool isViewingAssignedStaff = false;
+       
         public Admin()
         {
             InitializeComponent();

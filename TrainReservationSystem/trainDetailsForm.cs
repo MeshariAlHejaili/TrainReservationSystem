@@ -15,6 +15,7 @@ namespace TrainReservationSystem
     public partial class trainDetailsForm : Form
     {
         private int scheduleId;
+
         public trainDetailsForm(int scheduleId)
         {
             InitializeComponent();
@@ -99,8 +100,19 @@ namespace TrainReservationSystem
 
         private void btnAddReservation_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                // Open the PaymentForm with the ScheduleID
+                paymentForm paymentForm = new paymentForm(scheduleId); // Pass the ScheduleID from the current context
+                paymentForm.Show();
+                this.Hide(); // Optionally hide the current form
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Payment Form: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
 
         private void btnCancelReservation_Click(object sender, EventArgs e)

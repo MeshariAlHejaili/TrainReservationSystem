@@ -33,6 +33,9 @@
             toolStripMenuItem1 = new ToolStripMenuItem();
             numericUpDown1 = new NumericUpDown();
             panel1 = new Panel();
+            passengerDetailsBtn = new Button();
+            emailFiled = new TextBox();
+            label6 = new Label();
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel2 = new Panel();
@@ -94,6 +97,9 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.AppWorkspace;
+            panel1.Controls.Add(passengerDetailsBtn);
+            panel1.Controls.Add(emailFiled);
+            panel1.Controls.Add(label6);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(numericUpDown1);
             panel1.Dock = DockStyle.Top;
@@ -101,6 +107,33 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1025, 79);
             panel1.TabIndex = 3;
+            // 
+            // passengerDetailsBtn
+            // 
+            passengerDetailsBtn.Location = new Point(902, 30);
+            passengerDetailsBtn.Name = "passengerDetailsBtn";
+            passengerDetailsBtn.Size = new Size(94, 29);
+            passengerDetailsBtn.TabIndex = 6;
+            passengerDetailsBtn.Text = "Enter";
+            passengerDetailsBtn.UseVisualStyleBackColor = true;
+            passengerDetailsBtn.Click += passengerDetailsBtn_Click;
+            // 
+            // emailFiled
+            // 
+            emailFiled.Location = new Point(691, 32);
+            emailFiled.Name = "emailFiled";
+            emailFiled.Size = new Size(205, 27);
+            emailFiled.TabIndex = 5;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(543, 34);
+            label6.Name = "label6";
+            label6.Size = new Size(142, 25);
+            label6.TabIndex = 4;
+            label6.Text = "Passenger Email:";
             // 
             // label1
             // 
@@ -287,5 +320,8 @@
         private Label lblTotalPrice;
         private Label lblVAT;
         private Label lblSubPrice;
+        private TextBox emailFiled;
+        private Label label6;
+        private Button passengerDetailsBtn;
     }
 }

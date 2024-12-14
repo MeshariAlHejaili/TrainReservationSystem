@@ -18,12 +18,38 @@ namespace TrainReservationSystem
         public string DepartureStation { get; set; }
         public string ArrivalStation { get; set; }
         public DateTime TravelDate { get; set; }
+        public passengerDashboard passengerDashboard;
+        public Admin admin;
 
         public paymentForm()
         {
             InitializeComponent();
+            passengerDashboard = new passengerDashboard();
+            emailFiled.Hide();
+            label6.Hide();
+            passengerDetailsBtn.Hide();
         }
-        
+        public paymentForm(int scheduleID)
+        {
+            InitializeComponent();
+            admin = new Admin();
+            this.ScheduleID = scheduleID;
+
+            // Automatically fetch and display necessary details
+            TravelDate = GetTravelDate(scheduleID);
+            TrainName = GetTrainName(scheduleID);
+            DepartureStation = GetStationName(scheduleID, true);
+            ArrivalStation = GetStationName(scheduleID, false);
+
+            // Optionally pre-load seat selection
+            int trainID = GetTrainID(scheduleID);
+            if (trainID > 0)
+            {
+                LoadAvailableSeats(new ComboBox(), trainID); // Replace `new ComboBox()` with your actual ComboBox for admin use
+            }
+        }
+
+
         private int GetTrainID(int scheduleID)
         {
             string query = "SELECT TrainID FROM trainschedule WHERE ScheduleID = @ScheduleID";
@@ -196,9 +222,13 @@ namespace TrainReservationSystem
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            passengerDashboard passengerDashboard = new passengerDashboard();
             this.Hide();
-            passengerDashboard.Show();
+            if (admin != null)
+                admin.Show();
+            else
+            {
+                passengerDashboard.Show();
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -250,7 +280,14 @@ namespace TrainReservationSystem
                 }
 
                 MessageBox.Show("All reservations successfully made!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+
+                this.Hide();
+                if (admin != null)
+                    admin.Show();
+                else
+                {
+                    passengerDashboard.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -274,5 +311,120 @@ namespace TrainReservationSystem
             lblTotalPrice.Text = $"Total: ${totalPrice:F2}";
         }
 
+        /************************* Admin methods *********************************/
+        private DateTime GetTravelDate(int scheduleID)
+        {
+            string query = "SELECT Date FROM trainschedule WHERE ScheduleID = @ScheduleID";
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ScheduleID", scheduleID);
+
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToDateTime(result);
+                    }
+                    else
+                    {
+                        throw new Exception("Travel date not found for the given ScheduleID.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error retrieving travel date: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return DateTime.MinValue; // Return default value in case of error
+                }
+            }
+        }
+        private string GetTrainName(int scheduleID)
+        {
+            string query = @"
+        SELECT t.Name_EN 
+        FROM trainschedule ts 
+        JOIN train t ON ts.TrainID = t.TrainID 
+        WHERE ts.ScheduleID = @ScheduleID";
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ScheduleID", scheduleID);
+
+                    object result = cmd.ExecuteScalar();
+                    return result?.ToString() ?? "Unknown Train";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error retrieving train name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return "Unknown Train";
+                }
+            }
+        }
+        private string GetStationName(int scheduleID, bool isDeparture)
+        {
+            string query = @"
+        SELECT s.StationName 
+        FROM trainschedule ts 
+        JOIN station s ON ts." + (isDeparture ? "From_StationID" : "To_StationID") + @" = s.StationID 
+        WHERE ts.ScheduleID = @ScheduleID";
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ScheduleID", scheduleID);
+
+                    object result = cmd.ExecuteScalar();
+                    return result?.ToString() ?? "Unknown Station";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error retrieving station name: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return "Unknown Station";
+                }
+            }
+        }
+
+        private void passengerDetailsBtn_Click(object sender, EventArgs e)
+        {
+            string email = emailFiled.Text;
+            string passengerID = getIDDocument(email);
+            if (passengerID != null)
+            {
+                // Store the IDDocument in the session
+                Session.LoggedInPassengerIDDocument = passengerID;
+                MessageBox.Show("Email entered correctly.", "successfull", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show("Invalid email.", "Passenger information Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        public string getIDDocument(string email) {
+
+            string query = "SELECT IDDocument FROM passenger WHERE Email = @Email";
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@Email", email);
+
+                conn.Open();
+                object result = cmd.ExecuteScalar();
+                return result != null ? result.ToString() : null; // Return IDDocument or null if not found
+            }
+        }
+        
     }
 }
+
