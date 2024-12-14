@@ -23,8 +23,6 @@ namespace TrainReservationSystem
             InitializeDataGridView();
         }
 
-
-
         private void LoadTrainReservations()
         {
             try
@@ -103,6 +101,7 @@ namespace TrainReservationSystem
         {
 
         }
+
 
         private void btnCancelReservation_Click(object sender, EventArgs e)
         {
@@ -213,6 +212,25 @@ namespace TrainReservationSystem
             {
                 MessageBox.Show("Error: " + ex.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Logout_Click(object sender, EventArgs e)
+        {
+            LoginPage loginPage = new LoginPage();
+            this.Hide();
+            loginPage.Show();
+        }
+
+        private void Dashbord_Click(object sender, EventArgs e)
+        {
+            Admin admin = new Admin();
+            this.Hide();
+            admin.Show();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

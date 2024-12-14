@@ -182,5 +182,10 @@ namespace TrainReservationSystem
         {
             LoadTrainSchedules();
         }
+
+        private void cmbDepartureStation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

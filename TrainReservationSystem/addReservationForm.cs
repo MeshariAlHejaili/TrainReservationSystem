@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TrainReservationSystem
 {
-    public partial class addReservationForm : Form
+    public partial class AddReservationForm : Form
     {
-        public addReservationForm()
+        public AddReservationForm()
         {
             InitializeComponent();
         }

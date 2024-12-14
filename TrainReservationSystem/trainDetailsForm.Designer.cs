@@ -33,7 +33,11 @@
             btnAddReservation = new Button();
             btnCancelReservation = new Button();
             btnUpdateReservation = new Button();
+            panel1 = new Panel();
+            Dashbord = new Button();
+            Logout = new Button();
             ((System.ComponentModel.ISupportInitialize)reservationsDataGrid).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // mySqlCommandBuilder1
@@ -59,9 +63,9 @@
             // 
             // btnAddReservation
             // 
-            btnAddReservation.Location = new Point(12, 12);
+            btnAddReservation.Location = new Point(168, 0);
             btnAddReservation.Name = "btnAddReservation";
-            btnAddReservation.Size = new Size(139, 23);
+            btnAddReservation.Size = new Size(139, 34);
             btnAddReservation.TabIndex = 5;
             btnAddReservation.Text = "Add reservation";
             btnAddReservation.UseVisualStyleBackColor = true;
@@ -69,9 +73,9 @@
             // 
             // btnCancelReservation
             // 
-            btnCancelReservation.Location = new Point(165, 12);
+            btnCancelReservation.Location = new Point(325, 0);
             btnCancelReservation.Name = "btnCancelReservation";
-            btnCancelReservation.Size = new Size(135, 23);
+            btnCancelReservation.Size = new Size(135, 34);
             btnCancelReservation.TabIndex = 6;
             btnCancelReservation.Text = "Cancel reservation";
             btnCancelReservation.UseVisualStyleBackColor = true;
@@ -79,27 +83,60 @@
             // 
             // btnUpdateReservation
             // 
-            btnUpdateReservation.Location = new Point(327, 12);
+            btnUpdateReservation.Location = new Point(480, 0);
             btnUpdateReservation.Name = "btnUpdateReservation";
-            btnUpdateReservation.Size = new Size(154, 23);
+            btnUpdateReservation.Size = new Size(154, 34);
             btnUpdateReservation.TabIndex = 7;
             btnUpdateReservation.Text = "Update reservation";
             btnUpdateReservation.UseVisualStyleBackColor = true;
             btnUpdateReservation.Click += btnUpdateReservation_Click;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ActiveCaption;
+            panel1.Controls.Add(Dashbord);
+            panel1.Controls.Add(Logout);
+            panel1.Controls.Add(btnUpdateReservation);
+            panel1.Controls.Add(btnAddReservation);
+            panel1.Controls.Add(btnCancelReservation);
+            panel1.Location = new Point(0, 1);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 34);
+            panel1.TabIndex = 17;
+            panel1.Paint += panel1_Paint;
+            // 
+            // Dashbord
+            // 
+            Dashbord.Location = new Point(0, 0);
+            Dashbord.Name = "Dashbord";
+            Dashbord.Size = new Size(103, 34);
+            Dashbord.TabIndex = 9;
+            Dashbord.Text = "Dash bord";
+            Dashbord.UseVisualStyleBackColor = true;
+            Dashbord.Click += Dashbord_Click;
+            // 
+            // Logout
+            // 
+            Logout.Location = new Point(697, 0);
+            Logout.Name = "Logout";
+            Logout.Size = new Size(103, 34);
+            Logout.TabIndex = 8;
+            Logout.Text = "Logout";
+            Logout.UseVisualStyleBackColor = true;
+            Logout.Click += Logout_Click;
             // 
             // trainDetailsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnUpdateReservation);
-            Controls.Add(btnCancelReservation);
-            Controls.Add(btnAddReservation);
+            Controls.Add(panel1);
             Controls.Add(reservationsDataGrid);
             Name = "trainDetailsForm";
             Text = "trainDetailsForm";
             Load += trainDetailsForm_Load;
             ((System.ComponentModel.ISupportInitialize)reservationsDataGrid).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -110,5 +147,8 @@
         private Button btnAddReservation;
         private Button btnCancelReservation;
         private Button btnUpdateReservation;
+        private Panel panel1;
+        private Button Dashbord;
+        private Button Logout;
     }
 }

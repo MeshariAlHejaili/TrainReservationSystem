@@ -57,7 +57,7 @@
             passengerMenu.Items.AddRange(new ToolStripItem[] { myResToolStripMenuItem, logOutToolStripMenuItem });
             passengerMenu.Location = new Point(0, 0);
             passengerMenu.Name = "passengerMenu";
-            passengerMenu.Size = new Size(1050, 36);
+            passengerMenu.Size = new Size(1050, 29);
             passengerMenu.TabIndex = 0;
             passengerMenu.Text = "menuStrip1";
             // 
@@ -65,7 +65,7 @@
             // 
             myResToolStripMenuItem.BackColor = SystemColors.ButtonShadow;
             myResToolStripMenuItem.Name = "myResToolStripMenuItem";
-            myResToolStripMenuItem.Size = new Size(168, 32);
+            myResToolStripMenuItem.Size = new Size(137, 25);
             myResToolStripMenuItem.Text = "My Reservations";
             myResToolStripMenuItem.Click += myResToolStripMenuItem_Click;
             // 
@@ -74,7 +74,7 @@
             logOutToolStripMenuItem.Alignment = ToolStripItemAlignment.Right;
             logOutToolStripMenuItem.BackColor = SystemColors.ButtonShadow;
             logOutToolStripMenuItem.Name = "logOutToolStripMenuItem";
-            logOutToolStripMenuItem.Size = new Size(92, 32);
+            logOutToolStripMenuItem.Size = new Size(74, 25);
             logOutToolStripMenuItem.Text = "LogOut";
             logOutToolStripMenuItem.Click += logOutToolStripMenuItem_Click;
             // 
@@ -150,7 +150,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(251, 33);
             label3.Name = "label3";
-            label3.Size = new Size(88, 20);
+            label3.Size = new Size(70, 15);
             label3.TabIndex = 5;
             label3.Text = "Destination:";
             // 
@@ -159,7 +159,7 @@
             label2.AutoSize = true;
             label2.Location = new Point(9, 34);
             label2.Name = "label2";
-            label2.Size = new Size(79, 20);
+            label2.Size = new Size(62, 15);
             label2.TabIndex = 4;
             label2.Text = "Departure:";
             // 
@@ -168,7 +168,7 @@
             cmbDestinationStation.FormattingEnabled = true;
             cmbDestinationStation.Location = new Point(345, 31);
             cmbDestinationStation.Name = "cmbDestinationStation";
-            cmbDestinationStation.Size = new Size(151, 28);
+            cmbDestinationStation.Size = new Size(151, 23);
             cmbDestinationStation.TabIndex = 3;
             // 
             // cmbDepartureStation
@@ -176,8 +176,9 @@
             cmbDepartureStation.FormattingEnabled = true;
             cmbDepartureStation.Location = new Point(94, 30);
             cmbDepartureStation.Name = "cmbDepartureStation";
-            cmbDepartureStation.Size = new Size(151, 28);
+            cmbDepartureStation.Size = new Size(151, 23);
             cmbDepartureStation.TabIndex = 2;
+            cmbDepartureStation.SelectedIndexChanged += cmbDepartureStation_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -185,7 +186,7 @@
             label1.Font = new Font("Segoe UI", 12F);
             label1.Location = new Point(511, 31);
             label1.Name = "label1";
-            label1.Size = new Size(57, 28);
+            label1.Size = new Size(45, 21);
             label1.TabIndex = 1;
             label1.Text = "Date:";
             // 
@@ -193,12 +194,12 @@
             // 
             dtpTravelDate.Location = new Point(574, 34);
             dtpTravelDate.Name = "dtpTravelDate";
-            dtpTravelDate.Size = new Size(247, 27);
+            dtpTravelDate.Size = new Size(247, 23);
             dtpTravelDate.TabIndex = 0;
             // 
             // passengerDashboard
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1050, 593);
             Controls.Add(passengerTrainTable);
