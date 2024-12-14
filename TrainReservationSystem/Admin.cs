@@ -51,7 +51,7 @@ namespace TrainReservationSystem
                 DataTable trainScheduleTable = new DataTable();
                 adapter.Fill(trainScheduleTable);
 
-                passengerTrainDataGrid.DataSource = trainScheduleTable; // Bind train schedules to the grid
+                passengerTrainDataGrid.DataSource = trainScheduleTable; 
             }
         }
 
