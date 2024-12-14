@@ -37,7 +37,7 @@ namespace TrainReservationSystem
                     r.SeatNumber,
                     r.ReservationDate,
                     r.TravelDate,
-                    r.FlightNumber,
+                    r.TrainName,
                     r.Status,
                     ts.ScheduleID
                 FROM 
@@ -86,7 +86,7 @@ namespace TrainReservationSystem
                 reservationsDataGrid.Columns["Status"].ReadOnly = false; // Editable
                 reservationsDataGrid.Columns["ReservationDate"].ReadOnly = false; // Editable
                 reservationsDataGrid.Columns["TravelDate"].ReadOnly = false; // Editable
-                reservationsDataGrid.Columns["FlightNumber"].ReadOnly = false; // Editable
+                reservationsDataGrid.Columns["TrainName"].ReadOnly = false; // Editable
             }
         }
 
@@ -179,7 +179,7 @@ namespace TrainReservationSystem
                     string status = reservationsDataGrid.SelectedRows[0].Cells["Status"].Value.ToString();
                     DateTime reservationDate = Convert.ToDateTime(reservationsDataGrid.SelectedRows[0].Cells["ReservationDate"].Value);
                     DateTime travelDate = Convert.ToDateTime(reservationsDataGrid.SelectedRows[0].Cells["TravelDate"].Value);
-                    string flightNumber = reservationsDataGrid.SelectedRows[0].Cells["FlightNumber"].Value.ToString();
+                    string TrainName = reservationsDataGrid.SelectedRows[0].Cells["TrainName"].Value.ToString();
 
                     // Update the reservation in the database
                     using (MySqlConnection conn = DatabaseHelper.GetConnection())
@@ -191,7 +191,7 @@ namespace TrainReservationSystem
                         Status = @Status,
                         ReservationDate = @ReservationDate,
                         TravelDate = @TravelDate,
-                        FlightNumber = @FlightNumber
+                        TrainName = @TrainName
                     WHERE 
                         ReservationID = @ReservationID";
 
@@ -200,7 +200,7 @@ namespace TrainReservationSystem
                         cmd.Parameters.AddWithValue("@Status", status);
                         cmd.Parameters.AddWithValue("@ReservationDate", reservationDate);
                         cmd.Parameters.AddWithValue("@TravelDate", travelDate);
-                        cmd.Parameters.AddWithValue("@FlightNumber", flightNumber);
+                        cmd.Parameters.AddWithValue("@TrainName", TrainName);
                         cmd.Parameters.AddWithValue("@ReservationID", reservationId);
 
                         conn.Open();

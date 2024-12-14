@@ -192,8 +192,8 @@ namespace TrainReservationSystem
         private void InsertReservation(string passengerName, string passengerAge, string seatNumber, int trainID)
         {
             string query = @"
-        INSERT INTO reservation (IDDocument, ReservationDate, TravelDate, FlightNumber, SeatNumber, Status, ScheduleID)
-        VALUES (@IDDocument, @ReservationDate, @TravelDate, @FlightNumber, @SeatNumber, 'Confirmed', @ScheduleID)";
+        INSERT INTO reservation (IDDocument, ReservationDate, TravelDate, TrainName, SeatNumber, Status, ScheduleID)
+        VALUES (@IDDocument, @ReservationDate, @TravelDate, @TrainName, @SeatNumber, 'Confirmed', @ScheduleID)";
 
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
             {
@@ -205,7 +205,7 @@ namespace TrainReservationSystem
                     cmd.Parameters.AddWithValue("@IDDocument", Session.LoggedInPassengerIDDocument);
                     cmd.Parameters.AddWithValue("@ReservationDate", DateTime.Now);
                     cmd.Parameters.AddWithValue("@TravelDate", TravelDate); // From PaymentForm property
-                    cmd.Parameters.AddWithValue("@FlightNumber", TrainName); // From PaymentForm property
+                    cmd.Parameters.AddWithValue("@TrainName", TrainName); // From PaymentForm property
                     cmd.Parameters.AddWithValue("@SeatNumber", seatNumber);
                     cmd.Parameters.AddWithValue("@ScheduleID", ScheduleID); // From PaymentForm property
 

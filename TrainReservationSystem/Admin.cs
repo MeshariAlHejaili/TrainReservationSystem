@@ -234,7 +234,8 @@ namespace TrainReservationSystem
                         // Open ReportsForm and pass the ScheduleID
                         ReportsForm reportsForm = new ReportsForm(selectedScheduleId);
                         reportsForm.GenerateReports();  // This will load and display the reports
-                        reportsForm.ShowDialog(); // Show the form as a modal
+                        this.Hide();        // Show the form as a modal
+                        reportsForm.Show();
                     }
                     catch (Exception ex)
                     {

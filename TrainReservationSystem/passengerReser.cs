@@ -24,7 +24,7 @@ namespace TrainReservationSystem
         SELECT 
             r.ReservationID AS 'Reservation ID', 
             ts.Date AS 'Travel Date', 
-            r.FlightNumber AS 'Train Name', 
+            r.TrainName AS 'Train Name', 
             s1.StationName AS 'Departure Station', 
             s2.StationName AS 'Arrival Station', 
             r.SeatNumber AS 'Seat Number', 
