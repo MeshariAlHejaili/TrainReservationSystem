@@ -71,7 +71,7 @@
             // 
             // btnReservation
             // 
-            btnReservation.Location = new Point(625, 32);
+            btnReservation.Location = new Point(25, 32);
             btnReservation.Name = "btnReservation";
             btnReservation.Size = new Size(136, 23);
             btnReservation.TabIndex = 11;
@@ -102,7 +102,7 @@
             // 
             // btnGenerateReports
             // 
-            btnGenerateReports.Location = new Point(210, 32);
+            btnGenerateReports.Location = new Point(596, 32);
             btnGenerateReports.Name = "btnGenerateReports";
             btnGenerateReports.Size = new Size(139, 23);
             btnGenerateReports.TabIndex = 12;
@@ -112,7 +112,7 @@
             // 
             // btnAssignStaff
             // 
-            btnAssignStaff.Location = new Point(12, 32);
+            btnAssignStaff.Location = new Point(212, 32);
             btnAssignStaff.Name = "btnAssignStaff";
             btnAssignStaff.Size = new Size(139, 23);
             btnAssignStaff.TabIndex = 4;

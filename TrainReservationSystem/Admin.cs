@@ -20,6 +20,7 @@ namespace TrainReservationSystem
         {
             InitializeComponent();
             LoadTrainSchedules();
+            LoadStations();
             passengerTrainDataGrid.CellClick += passengerTrainDataGrid_CellClick;
         }
 
@@ -55,15 +56,61 @@ namespace TrainReservationSystem
                 passengerTrainDataGrid.DataSource = trainScheduleTable; 
             }
         }
+        private void LoadStations()
+        {
+            string query = "SELECT StationName FROM station";
+
+            using (MySqlConnection conn = DatabaseHelper.GetConnection())
+            {
+                try
+                {
+                    conn.Open();
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+
+                    List<string> stations = new List<string>();
+
+                    while (reader.Read())
+                    {
+                        stations.Add(reader.GetString("StationName"));
+                    }
+
+                    // Bind station names to the ComboBoxes
+                    cmbDepartureStation.DataSource = new List<string>(stations);
+                    cmbDestinationStation.DataSource = new List<string>(stations);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error loading stations: {ex.Message}");
+                }
+            }
+        }
 
         private void passengerTrainDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0) // Ensure it's not the header row
             {
-                // Get the selected ScheduleID
-                selectedScheduleId = Convert.ToInt32(passengerTrainDataGrid.Rows[e.RowIndex].Cells["ScheduleID"].Value);
+                try
+                {
+                    // Attempt to retrieve ScheduleID dynamically
+                    var scheduleIdCellValue = passengerTrainDataGrid.Rows[e.RowIndex].Cells
+                        .Cast<DataGridViewCell>()
+                        .FirstOrDefault(c => c.OwningColumn.Name.Equals("ScheduleID", StringComparison.OrdinalIgnoreCase))?
+                        .Value;
+
+                    if (scheduleIdCellValue != null && scheduleIdCellValue != DBNull.Value)
+                    {
+                        selectedScheduleId = Convert.ToInt32(scheduleIdCellValue);
+                    }
+                   
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error retrieving ScheduleID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
 
         private void btnAssignStaff_Click(object sender, EventArgs e)
         {
