@@ -43,7 +43,7 @@ namespace TrainReservationSystem
             JOIN 
                 train t ON ts.TrainID = t.TrainID
             WHERE 
-                ts.Date = CURDATE() AND ts.ScheduleID = @ScheduleID;";
+                ts.Date = CURDATE()";
 
             using (MySqlConnection conn = DatabaseHelper.GetConnection())
             {

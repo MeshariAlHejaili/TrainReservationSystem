@@ -84,9 +84,9 @@
             lblActiveTrainsTitle.AutoSize = true;
             lblActiveTrainsTitle.Location = new Point(10, 3);
             lblActiveTrainsTitle.Name = "lblActiveTrainsTitle";
-            lblActiveTrainsTitle.Size = new Size(184, 17);
+            lblActiveTrainsTitle.Size = new Size(171, 17);
             lblActiveTrainsTitle.TabIndex = 9;
-            lblActiveTrainsTitle.Text = "Currently Active Trains";
+            lblActiveTrainsTitle.Text = "Todays Active Trains";
             // 
             // groupBoxStations
             // 
