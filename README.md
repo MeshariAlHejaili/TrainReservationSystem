@@ -21,9 +21,3 @@ The project allows passengers to search and reserve train tickets, while adminis
 - C# with Windows Forms for the user interface
 - MySQL as the database
 - MySqlConnector for database connectivity
-
-## Setup Instructions
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/yourusername/TrainReservationSystem.git
